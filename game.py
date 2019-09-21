@@ -73,6 +73,7 @@ def didWin(board):
     return False
 
 def printBoard(board, OG):
+    print(' Marked Board   |  Board Numbers')
     for y in range(0,5):
         ogStr = ''
         for x in range(0,5):
