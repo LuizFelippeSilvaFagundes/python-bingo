@@ -10,7 +10,7 @@ def generateBoard():
     board = [list(), list(), list(), list(),list()]
     for x in range(0,5):
         for y in range(0,5):
-            i = random.randint(0,len(whitelist))
+            i = random.randint(0,len(whitelist) - 1)
             num = whitelist[i]
             del whitelist[i]
             board[x].append(num)
