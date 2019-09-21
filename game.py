@@ -77,6 +77,10 @@ def printBoard(board, OG):
     for y in range(0,5):
         ogStr = ''
         for x in range(0,5):
+            if board[x][y] != ' X':
+                if int(board[x][y]) < 10:
+                    print(" ",end='')
+                    ogStr += ' '
             print(board[x][y],end=" ")
             ogStr += str(OG[x][y]) + ' '
         print('   ' + ogStr)
@@ -85,11 +89,6 @@ def draw(notDrawn):
     num = notDrawn[random.randint(0,len(notDrawn)-1)]
     notDrawn.remove(num)
     return num
-
-
-
-# TO DO: Add check for win.
-# TO DO: Print single digits in 2 digits, ex: 09
 
 def playGame():
     notDrawn = list(range(1,92))
