@@ -103,12 +103,14 @@ def playGame():
         userInput = input()
         clearScreen()
         if userInput == 'q':
+            print('Press Enter to Draw Number. Enter q, then press enter to quit.')
             printBoard(board1, OG_BOARD1)
             print("Game Over")
             exit()
         else:
             curDraw = draw(notDrawn)
             found = inBoard(curDraw, board1)
+            print('Press Enter to Draw Number. Enter q, then press enter to quit.')
             printBoard(board1, OG_BOARD1)
             if didWin(board1) == True:
                 while True:
