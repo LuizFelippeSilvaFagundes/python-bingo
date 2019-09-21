@@ -1,9 +1,9 @@
 import random
 import copy
-notDrawn = list(range(1,92))
 
 def clearScreen():
     print(chr(27) + "[2J") # Escape sequence to clear screen
+
 
 def generateRandom(blacklist):
     while True:
@@ -24,6 +24,7 @@ def generateBoard():
     board[2][2] = ' X'
     return board
 
+# checks board if contains num
 def inBoard(num, board):
     for x in range(0,5):
         for y in range(0,5):
@@ -32,6 +33,7 @@ def inBoard(num, board):
                 return True
     return False
 
+# bool on if board meets win condition
 def didWin(board):
     #check for horizontal win
     for x in range(0,5):
@@ -90,35 +92,52 @@ def draw(notDrawn):
     notDrawn.remove(num)
     return num
 
-board1 = generateBoard()
-OG_BOARD1 = copy.deepcopy(board1)
 
-clearScreen()
-print('Press Enter to Draw Number. Enter q, then press enter to quit.')
-printBoard(board1, OG_BOARD1)
 
 # TO DO: Add check for win.
 # TO DO: Print single digits in 2 digits, ex: 09
-while True:
-    userInput = input()
-    print()
-    clearScreen()
-    if userInput == 'q':
-        printBoard(board1, OG_BOARD1)
-        print("Game Over")
-        exit()
-    else:
-        curDraw = draw(notDrawn)
-        found = inBoard(curDraw, board1)
-        printBoard(board1, OG_BOARD1)
-        if didWin(board1) == True:
-            print('BINGO!!! --- YOU WIN!')
-        else:
-            if found == True:
-                print("Found a match! (((o(*ﾟ▽ﾟ*)o))) --- Drew " + str(curDraw))
-            else:
-                print("Bad draw. No Match. (ノ°Д°）ノ︵ ┻━┻ --- Drew " + str(curDraw))
 
+def playGame():
+    notDrawn = list(range(1,92))
+    board1 = generateBoard()
+    OG_BOARD1 = copy.deepcopy(board1)
+
+    clearScreen()
+    print('Press Enter to Draw Number. Enter q, then press enter to quit.')
+    printBoard(board1, OG_BOARD1)
+
+    while True:
+        userInput = input()
+        clearScreen()
+        if userInput == 'q':
+            printBoard(board1, OG_BOARD1)
+            print("Game Over")
+            exit()
+        else:
+            curDraw = draw(notDrawn)
+            found = inBoard(curDraw, board1)
+            printBoard(board1, OG_BOARD1)
+            if didWin(board1) == True:
+                while True:
+                    clearScreen()
+                    print('Winner! Enter "new" to start new game. Enter "q" to quit.')
+                    printBoard(board1, OG_BOARD1)
+                    print('BINGO!!! --- YOU WIN! --- Drew ' + str(curDraw))
+                    userInput = input()
+                    if userInput == 'q':
+                        print("Game Over")
+                        return False
+                    elif userInput == 'new':
+                        return True
+            else:
+                if found == True:
+                    print("Found a match! (((o(*ﾟ▽ﾟ*)o))) --- Drew " + str(curDraw))
+                else:
+                    print("Bad draw. No Match. (ノ°Д°）ノ︵ ┻━┻ --- Drew " + str(curDraw))
+
+runGame = True
+while runGame == True:
+    runGame = playGame()
 
 
 
