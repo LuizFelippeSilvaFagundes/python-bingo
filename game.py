@@ -32,8 +32,50 @@ def inBoard(num, board):
                 return True
     return False
 
+def didWin(board):
+    #check for horizontal win
+    for x in range(0,5):
+        count = 0
+        for y in range(0,5):    
+            if board[y][x] != ' X':
+                break
+            else:
+                count += 1
+        if count == 5:
+            return True
+    
+    #check for vertical win
+    for y in range(0,5):
+        count = 0
+        for x in range(0,5):   
+            if board[y][x] != ' X':
+                break
+            else:
+                count += 1
+        if count == 5:
+            return True
 
+    #check for diagonal - top left to bottom right
+    count = 0  
+    for i in range(0,5):  
+        if board[i][i] != ' X':
+            break
+        else:
+            count += 1
+    if count == 5:
+        return True
 
+    #check for diagnal - top right to bottom left
+    count = 0  
+    for x in range(0,5):    
+        if board[4-x][x] != ' X':
+            break
+        else:
+            count += 1
+    if count == 5:
+        return True
+
+    return False
 
 def printBoard(board, OG):
     for y in range(0,5):
@@ -69,10 +111,13 @@ while True:
         curDraw = draw(notDrawn)
         found = inBoard(curDraw, board1)
         printBoard(board1, OG_BOARD1)
-        if found == True:
-            print("Found a match! (((o(*ﾟ▽ﾟ*)o))) --- Drew " + str(curDraw))
+        if didWin(board1) == True:
+            print('BINGO!!! --- YOU WIN!')
         else:
-            print("Bad draw. No Match. (ノ°Д°）ノ︵ ┻━┻ --- Drew " + str(curDraw))
+            if found == True:
+                print("Found a match! (((o(*ﾟ▽ﾟ*)o))) --- Drew " + str(curDraw))
+            else:
+                print("Bad draw. No Match. (ノ°Д°）ノ︵ ┻━┻ --- Drew " + str(curDraw))
 
 
 
