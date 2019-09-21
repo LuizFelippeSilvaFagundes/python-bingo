@@ -5,22 +5,15 @@ def clearScreen():
     print(chr(27) + "[2J") # Escape sequence to clear screen
 
 
-def generateRandom(blacklist):
-    while True:
-        try:
-            num = random.randint(1,91)
-            blacklist.index(num)
-        except ValueError:
-            return num
-
 def generateBoard():
-    blacklist = list()
+    whitelist = list(range(1,92))
     board = [list(), list(), list(), list(),list()]
     for x in range(0,5):
         for y in range(0,5):
-            num = generateRandom(blacklist)
+            i = random.randint(0,len(whitelist))
+            num = whitelist[i]
+            del whitelist[i]
             board[x].append(num)
-            blacklist.append(num)
     board[2][2] = ' X'
     return board
 
